@@ -1,0 +1,16 @@
+model:
+  name: "bert-base-uncased" 
+  num_items: 1000  
+
+train:
+  batch_size: 32  
+  epochs: 5  
+  lr: 1e-5  
+
+paths:
+  train_data: "train_data.csv" 
+  val_data: "val_data.csv"  
+  model_save: "bert4rec_model.pth"  
+
+device:
+  use_cuda: true  
