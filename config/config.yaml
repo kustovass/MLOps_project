@@ -76,4 +76,4 @@ callbacks:
     lrs: 1e-3
 
 csv:
-  csv_dir: cats_predictions.csv
+  csv_dir: Cats_predictions.csv
