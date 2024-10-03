@@ -16,20 +16,10 @@
 │   ├── infer.py
 │   ├── __init__.py
 │   ├── model.py
-│   ├── __pycache__
-│   │   ├── dataclass.cpython-310.pyc
-│   │   ├── infer.cpython-310.pyc
-│   │   ├── train.cpython-310.pyc
-│   │   ├── export_model.cpython-310.pyc
-│   │   ├── __init__.cpython-310.pyc
-│   │   └── model.cpython-310.pyc
 │   ├── train.py
 │   └── utils.py
-├── cat_detection_model.ckpt
-├── Cats_predictions.csv
-├── label_encoder.pkl
 ├── poetry.lock
-├── project_structure.txt
+├── requirements.txt
 ├── pyproject.toml
 ├── README.md
 └── setup.cfg
@@ -51,7 +41,6 @@
 5. Выход: порода кошки (классификационный вывод)
 
 ## Способ предсказания
-После обучения модели, необходимо обернуть ее в продакшен пайплайн.
 Шаги:
 1. Загрузка обученной модели.
 2. Предобработка новых изображений кошек перед передачей модели.
