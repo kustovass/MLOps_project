@@ -1,11 +1,6 @@
-FROM python:3.9
-
-WORKDIR /app
+FROM nvcr.io/nvidia/tritonserver:23.04-py3
 
 COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["python", "commands.py"]
+ENTRYPOINT [ "tritonserver" ]
