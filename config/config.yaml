@@ -1,0 +1,79 @@
+data:
+  test_size: 0.25
+  n_classes: 50
+  batch_size: 64
+  val_size: 0.25
+  dataloader_num_workers: 8
+  test_dir: data/test
+  train_dir: data/train
+
+model:
+  name: microsoft/resnet-18
+  weights: ResNet18_Weights
+  layers: 5
+  output_dim: 128
+  save_model_name: cat_model.ckpt
+
+train:
+  epochs: 5
+  learning_rate: 1e-3
+  weight_decay: 0.01
+  step_size: 3
+  gamma: 0.1
+  model_dir: cat_model
+  accelerator: cuda
+  precision: 16-mixed
+  devices:
+    - 0
+  grad_accum_steps: 4
+  overfit_batches: 0
+  num_sanity_val_steps: 4
+  val_check_interval: 1.0
+  full_deterministic_mode: false
+  benchmark: false
+  gradient_clip_val: 1.0
+  profiler:
+  log_every_n_steps: 1
+  detect_anomaly: false
+  batch_size_finder: false
+
+export:
+  export_path: "./outputs/export"
+  export_name: "model"
+  name_version: True
+  input_sample_shape: [64, 3, 7, 7]
+
+loggers:
+  experiment_name: exp_name
+  wandb:
+    project: mnistops
+  mlflow:
+    tracking_uri: http://localhost:5000
+    artifact_location: ./outputs/mlflow_artifacts
+    save_dir: ./outputs/mlfolw_logs
+    log_model: True
+    tags: { exp_name: exp_name }
+
+artifacts:
+  experiment_name: experiment
+  checkpoint:
+    use: false
+    dirpath: checkpoints
+    filename: "{experiment_name}_{epoch:02d}-{val_loss:.4f}"
+    monitor:
+      - val_loss
+      - val_accuracy
+    mode: max
+    save_top_k: 3
+    every_n_train_steps:
+    every_n_epochs: 1
+
+callbacks:
+  model_summary:
+    max_depth: 1
+  swa:
+    use: false
+    lrs: 1e-3
+
+csv:
+  csv_dir: cats_predictions.csv
