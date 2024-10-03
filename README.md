@@ -6,7 +6,6 @@
 ├── commands.py
 ├── config
 │   └── config.yaml
-├── data
 ├── dataclass.py
 ├── data.dvc
 ├── Dockerfile
