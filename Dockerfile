@@ -1,6 +1,11 @@
-FROM nvcr.io/nvidia/tritonserver:23.04-py3
+FROM python:3.10-slim-buster
 
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+WORKDIR /app
 
+ADD . /app
 
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir poetry
+
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-root --no-dev
